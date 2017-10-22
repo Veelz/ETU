@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="Journal.ProductParameterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Journal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:Journal.DataModel"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{Binding Source={d:DesignData Source=/DataModel/FoodRecords.json, Type=data:ProductList}}"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+    <ScrollViewer>
+        <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock x:Uid="InfProduct.Text" Text="foodjournal" Margin="0,-6.5,0,26.5" 
+                       Style="{ThemeResource HeaderTextBlockStyle}" 
+                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <TextBlock x:Uid="ProductNameText" Text="ProductNameText"
+                       Style="{ThemeResource BaseTextBlockStyle}" />
+            <TextBox x:Name="productName"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <StackPanel>
+                <TextBlock x:Uid="PortionText" Text="Portion" Margin="0,-6.5,0,10.5" 
+                       Style="{ThemeResource BaseTextBlockStyle}"/>
+                <StackPanel x:Name="PortionButtons">
+                    <!-- Radio Buttons-->
+                </StackPanel>
+                <TextBlock x:Uid="PortionNameText" Text="PortionName"
+                           Style="{ThemeResource BaseTextBlockStyle}" />
+                <TextBox x:Name="PortionNameInput"/>
+                <TextBlock x:Uid="CaloriesText" Text="Calories"
+                           Style="{ThemeResource BaseTextBlockStyle}" />
+                <TextBox x:Name="CaloriesInput"/>
+                <TextBlock x:Uid="ProteinText" Text="Protein"
+                           Style="{ThemeResource BaseTextBlockStyle}" />
+                <TextBox x:Name="ProteinInput"/>
+                <TextBlock x:Uid="CarbonText" Text="Carbons"
+                           Style="{ThemeResource BaseTextBlockStyle}" />
+                <TextBox x:Name="CarbonsInput"/>
+                <TextBlock x:Uid="FatText" Text="Fats"
+                           Style="{ThemeResource BaseTextBlockStyle}" />
+                <TextBox x:Name="FatInput"/>
+                <StackPanel>
+                    <CheckBox x:Name="SnackItemCheckbox" 
+                              x:Uid="SnackCheckbox"
+                              Content="Snack" 
+                              IsThreeState="False"/>
+                    <CheckBox x:Name="BreakfastItemCheckbox"  
+                              x:Uid="BreakfastCheckbox"
+                              Content="Breakfast" 
+                              IsThreeState="False"/>
+                    <CheckBox x:Name="LunchItemCheckbox" 
+                              Content="Lunch" 
+                              x:Uid="LunchCheckbox"
+                              IsThreeState="False"/>
+                    <CheckBox x:Name="DinnerItemCheckbox" Content="Dinner" 
+                              x:Uid="DinnerCheckbox"
+                              IsThreeState="False"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    </ScrollViewer>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Uid="SaveAppBarButton" x:Name="SaveAppBarButton" 
+                          Label="Save" Icon="Save" Click="SaveAppBarButton_Click"/>
+            <!-- 
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="SecondaryButton1" x:Name="SecondaryButton1" Label="secondary command 1" />
+                <AppBarButton x:Uid="SecondaryButton2" x:Name="SecondaryButton2" Label="secondary command 2" />
+            </CommandBar.SecondaryCommands>
+            -->
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

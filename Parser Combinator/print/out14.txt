@@ -1,0 +1,11 @@
+if x
+ then
+    skip;
+    x:=1;
+    read y;
+    write y*1||z;
+else
+    skip;
+    skip;
+    skip;
+fi;

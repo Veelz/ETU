@@ -1,0 +1,26 @@
+#pragma once
+#include "mymath.h"
+#include <iostream>
+
+#define _USE_MATH_DEFINES
+#include <math.h>
+class Item
+{
+protected:
+	Vector v;	//скорость
+	Vector a;	//ускорение
+public:
+	Item();
+	void addAccelerate(Vector a);
+	virtual void doMove(double dt)=0;
+	virtual bool isInside(double _x, double _y)=0;
+	//virtual void border(double &x, double &y, int i)=0;
+};
+Item::Item()
+{	
+}
+void Item::addAccelerate(Vector a)
+{
+	this->a = a;
+}
+

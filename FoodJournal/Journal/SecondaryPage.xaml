@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="Journal.SecondaryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Journal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" 
+                    Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="LIVE TILES"  
+                       Style="{ThemeResource BaseTextBlockStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="другая"  
+                       Margin="9,-7,0,0"  
+                       Style="{ThemeResource BaseTextBlockStyle}"/>
+        </StackPanel>
+    </Grid>
+</Page>

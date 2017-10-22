@@ -1,0 +1,6 @@
+read x; //do read x:=(1*3) from keyboard
+if y + 10 == x 
+	(*then write y  
+	else skip*)
+while (x != 0)
+	x := x - (y**x/(99*3+4));

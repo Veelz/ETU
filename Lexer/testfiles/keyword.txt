@@ -1,0 +1,8 @@
+skip
+write
+read
+if
+then
+else
+do
+while

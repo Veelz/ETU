@@ -1,0 +1,8 @@
+//begin
+if (y == x) //checks that our vars is equal
+	then x:=1(*then write y  //y:=(x+3)z.
+*
+*	else skip*) i:=1;
+(*
+else 123.4231; 
+*)

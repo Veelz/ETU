@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddAppBarButton.Label" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="AddRecordPage.Title" xml:space="preserve">
+    <value>ДОБАВИТЬ ЗАПИСЬ</value>
+  </data>
+  <data name="AddRecordSection.Header" xml:space="preserve">
+    <value>ДОБАВИТЬ ЗАПИСЬ</value>
+  </data>
+  <data name="BreakfastItem.Text" xml:space="preserve">
+    <value>+ Завтрак</value>
+  </data>
+  <data name="BreakfastPivotItem.Header" xml:space="preserve">
+    <value>Завтрак</value>
+  </data>
+  <data name="CaloriesChart.Title" xml:space="preserve">
+    <value>Калории</value>
+  </data>
+  <data name="CaloriesText.Text" xml:space="preserve">
+    <value>Калории</value>
+  </data>
+  <data name="CaloriesUnits" xml:space="preserve">
+    <value>ккал</value>
+  </data>
+  <data name="CarbonsChart.Title" xml:space="preserve">
+    <value>Углеводы</value>
+  </data>
+  <data name="CarbonText.Text" xml:space="preserve">
+    <value>Углеводы</value>
+  </data>
+  <data name="DinnerItem.Text" xml:space="preserve">
+    <value>+ Ужин</value>
+  </data>
+  <data name="DinnerPivotItem.Header" xml:space="preserve">
+    <value>Ужин</value>
+  </data>
+  <data name="FatsChart.Title" xml:space="preserve">
+    <value>Жиры</value>
+  </data>
+  <data name="FatText.Text" xml:space="preserve">
+    <value>Жиры</value>
+  </data>
+  <data name="FindAppBarButton.Label" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Пятница</value>
+  </data>
+  <data name="Header.Text" xml:space="preserve">
+    <value>Дневник питания</value>
+  </data>
+  <data name="Hub.Header" xml:space="preserve">
+    <value>Дневник питания</value>
+  </data>
+  <data name="InfProduct.Text" xml:space="preserve">
+    <value>ИНФОРМАЦИЯ О ПРОДУКТЕ</value>
+  </data>
+  <data name="Journal.Header" xml:space="preserve">
+    <value>ДНЕВНИК</value>
+  </data>
+  <data name="LunchItem.Text" xml:space="preserve">
+    <value>+ Обед</value>
+  </data>
+  <data name="LunchPivotItem.Header" xml:space="preserve">
+    <value>Обед</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Понедельник</value>
+  </data>
+  <data name="NavigationFailedExceptionMessage" xml:space="preserve">
+    <value>Navigation failed.</value>
+  </data>
+  <data name="PortionText.Text" xml:space="preserve">
+    <value>Порция</value>
+  </data>
+  <data name="ProductNameText.Text" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="ProteinsChart.Title" xml:space="preserve">
+    <value>Белки</value>
+  </data>
+  <data name="ProteinText.Text" xml:space="preserve">
+    <value>Белки</value>
+  </data>
+  <data name="Report.Header" xml:space="preserve">
+    <value>ОТЧЕТ</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Суббота</value>
+  </data>
+  <data name="SnackItem.Text" xml:space="preserve">
+    <value>+ Перекус</value>
+  </data>
+  <data name="SnackPivotItem.Header" xml:space="preserve">
+    <value>Перекус</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Воскресенье</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Четверг</value>
+  </data>
+  <data name="TodayItem" xml:space="preserve">
+    <value>Сегодня</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Вторник</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Среда</value>
+  </data>
+  <data name="YesterdayItem.Text" xml:space="preserve">
+    <value>Вчера</value>
+  </data>
+  <data name="BreakfastCheckBox.Content" xml:space="preserve">
+    <value>Завтрак</value>
+  </data>
+  <data name="DinnerCheckbox.Content" xml:space="preserve">
+    <value>Ужин</value>
+  </data>
+  <data name="LunchCheckbox.Content" xml:space="preserve">
+    <value>Обед</value>
+  </data>
+  <data name="PortionNameText.Text" xml:space="preserve">
+    <value>Название порции</value>
+  </data>
+  <data name="SnackCheckbox.Content" xml:space="preserve">
+    <value>Перекус</value>
+  </data>
+  <data name="Sync.Label" xml:space="preserve">
+    <value>Синхронизировать с OneDrive</value>
+  </data>
+</root>

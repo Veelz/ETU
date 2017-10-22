@@ -1,0 +1,202 @@
+﻿<Page
+    x:Class="Journal.AddRecordPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Journal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:data="using:Journal.DataModel"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{Binding Source={d:DesignData Source=/DataModel/FoodRecords.json, Type=data:ProductList}}"
+    mc:Ignorable="d" 
+    Loaded="Page_Loaded">
+    
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <CommonNavigationTransitionInfo IsStaggeringEnabled="True"/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    
+    <Grid>
+        <Pivot x:Uid="AddRecordPage" Title="ADD RECORD" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True">
+            <PivotItem
+                x:Name="SnackItem"
+                x:Uid="SnackPivotItem"
+                Margin="19, 14.5, 0, 0"
+                Header="FirstPage">
+                <StackPanel Margin="0,0,0,15">
+                    <TextBlock Text="Добавленные продукты" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="SelectedSnackList"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" 
+                        ItemClick="SelectedList_ItemClick" 
+                        ContainerContentChanging="SelectedSnackList_ContainerContentChanging">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                                    <!--
+                                    <TextBlock 
+                                        Text="{Binding Name}" 
+                                        Name="SnackSubText"
+                                        Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" />
+                                    -->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Text="Список продуктов" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="SnackList"
+                        ItemsSource="{Binding SnackList, Mode=TwoWay}"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="SnackList_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </PivotItem>
+            
+            <PivotItem
+                x:Name="BreakfastItem"
+                x:Uid="BreakfastPivotItem"
+                Margin="19, 14.5, 0, 0"
+                Header="SecondPage"
+                DataContext="{Binding BreakfastList}">
+                <StackPanel Margin="0,0,0,15">
+                    <TextBlock Text="Добавленные продукты" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="SelectedBreakfastList"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="SelectedList_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                                    <!-- 
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" />
+                                    -->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Text="Список продуктов" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="BreakfastList"
+                        ItemsSource="{Binding}"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="BreakfastList_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </PivotItem>
+            
+            <PivotItem
+                x:Name="LunchItem"
+                x:Uid="LunchPivotItem"
+                Margin="19, 14.5, 0, 0"
+                Header="ThirdPage"
+                DataContext="{Binding LunchList}">
+                <StackPanel Margin="0,0,0,15">
+                    <TextBlock Text="Добавленные продукты" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="SelectedLunchList"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="SelectedList_ItemClick" 
+                        >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                                    <!--
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" />
+                                    -->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Text="Список продуктов" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="LunchList"
+                        ItemsSource="{Binding}"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="LunchList_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </PivotItem>
+            
+            <PivotItem
+                x:Name="DinnerItem"
+                x:Uid="DinnerPivotItem"
+                Margin="19, 14.5, 0, 0"
+                Header="FourthPage"
+                DataContext="{Binding DinnerList}">
+                <StackPanel Margin="0,0,0,15">
+                    <TextBlock Text="Добавленные продукты" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="SelectedDinnerList"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="SelectedList_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                                    <!-- 
+                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" />
+                                    -->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Text="Список продуктов" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+                    <ListView
+                        Name="DinnerList"
+                        ItemsSource="{Binding}"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="DinnerList_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </PivotItem>
+        </Pivot> 
+    </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Uid="FindAppBarButton" x:Name="SaveAppBarButton" 
+                          Label="save" Icon="Save" Click="SaveAppBarButton_Click" />
+            <AppBarButton x:Uid="AddAppBarButton" x:Name="AddAppBarButton" 
+                          Label="add" Icon="Add" Click="AddAppBarButton_Click"/>
+            <AppBarButton x:Uid="FindAppBarButton" x:Name="FindAppBarButton" 
+                          Label="find" Icon="Find" Click="FindAppBarButton_Click"/>
+            <!-- 
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="SecondaryButton1" x:Name="SecondaryButton1" Label="secondary command 1" />
+                <AppBarButton x:Uid="SecondaryButton2" x:Name="SecondaryButton2" Label="secondary command 2" />
+            </CommandBar.SecondaryCommands>
+            -->
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

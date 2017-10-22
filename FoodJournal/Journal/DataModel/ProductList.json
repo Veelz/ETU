@@ -1,0 +1,68 @@
+﻿[
+  {
+    "Name": "Чай",
+    "Type": [ "Snack","Breakfast","Lunch","Dinner" ],
+    "Portion": {
+      "Чашка": {
+        "Calories": 3.2,
+        "Protein": 0,
+        "Fat": 0,
+        "Carbons": 0
+      },
+      "Кружка": {
+        "Calories": 6.2,
+        "Protein": 0,
+        "Fat": 0,
+        "Carbons": 0
+      }
+    }
+  },
+  {
+    "Name": "Яблоко",
+    "Type": [ "Snack", "Breakfast", "Lunch", "Dinner" ],
+    "Portion": {
+      "Среднее яблоко": {
+        "Calories": 50.0,
+        "Protein": 1.0,
+        "Fat": 0.0,
+        "Carbons": 25.0
+      }
+    }
+  },
+  {
+    "Name": "Курица",
+    "Type": [ "Lunch", "Dinner" ],
+    "Portion": {
+      "Бедро": {
+        "Calories": 150.5,
+        "Protein": 55.0,
+        "Fat": 25.5,
+        "Carbons": 10.0
+      },
+      "Грудка": {
+        "Calories": 200.0,
+        "Protein": 80.0,
+        "Fat": 20.0,
+        "Carbons": 10.0
+      }
+    }
+  },
+    {
+    "Name": "Рис",
+    "Type": [ "Lunch","Dinner" ],
+    "Portion": {
+      "Порция": {
+        "Calories": 100,
+        "Protein": 55.0,
+        "Fat": 5.0,
+        "Carbons": 10.0
+      },
+      "Двойная порция": {
+        "Calories": 200.0,
+        "Protein": 110.0,
+        "Fat": 10.0,
+        "Carbons": 20.0
+      }
+    }
+  }
+]

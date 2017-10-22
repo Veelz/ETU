@@ -1,0 +1,60 @@
+﻿[
+  {
+    "UniqueId": "1",
+    "Type": "Breakfast",
+    "Date": "2017-04-18T21:38:32.219132+03:00",
+    "Products": {
+      "Tea": {
+        "Calories": 3.1,
+        "Protein": 0.0,
+        "Fat": 0.0,
+        "Carbons": 0.0
+      },
+      "Water": {
+        "Calories": 1.0,
+        "Protein": 0.0,
+        "Fat": 0.0,
+        "Carbons": 0.0
+      }
+    }
+  },
+  {
+    "UniqueId": "2",
+    "Type": "Lunch",
+    "Date": "2017-04-19T21:38:32.219132+03:00",
+    "Products": {
+      "Tea": {
+        "Calories": 3.1,
+        "Protein": 0.0,
+        "Fat": 0.0,
+        "Carbons": 0.0
+      },
+      "Water": {
+        "Calories": 1.0,
+        "Protein": 0.0,
+        "Fat": 0.0,
+        "Carbons": 0.0
+      }
+    }
+  },
+  {
+    "UniqueId": "3",
+    "Type": "Breakfast",
+    "Date": "2017-04-20T21:38:32.219132+03:00",
+    "Products": {
+      "Tea": {
+        "Calories": 3.1,
+        "Protein": 0.0,
+        "Fat": 0.0,
+        "Carbons": 0.0
+      },
+      "Water": {
+        "Calories": 1.0,
+        "Protein": 0.0,
+        "Fat": 0.0,
+        "Carbons": 0.0
+      }
+    }
+  },
+]
+

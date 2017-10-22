@@ -1,0 +1,151 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Journal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:Series="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:DataModel="using:Journal.DataModel"
+    x:Class="Journal.HubPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
+    d:DataContext="{Binding Source={d:DesignData Source=/DataModel/FoodRecords.json, Type=DataModel:FoodRecordsList}}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="HubSectionHeaderTemplate">
+            <TextBlock Margin="0,0,0,-9.5" Text="{Binding}"/>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Hub x:Name="Hub" x:Uid="Hub" Header="application name">
+            <HubSection x:Uid="AddRecordSection" Header="Добавить запись"
+                        HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <StackPanel Margin="0,0,0,27.5">
+                        <TextBlock Text="Snack"
+                                   Style="{ThemeResource ListViewItemTextBlockStyle}" Tapped="SnackItem_Tapped"
+                                   x:Uid="SnackItem" />
+                        <TextBlock Text="Breakfast"
+                                   Style="{ThemeResource ListViewItemTextBlockStyle}" Tapped="BreakfastItem_Tapped"
+                                   x:Uid="BreakfastItem" />
+                        <TextBlock Text="Lunch" 
+                                   Style="{ThemeResource ListViewItemTextBlockStyle}" Tapped="LunchItem_Tapped"
+                                   x:Uid="LunchItem" />
+                        <TextBlock Text="Dinner"
+                                   Style="{ThemeResource ListViewItemTextBlockStyle}" Tapped="Dinner_Tapped"
+                                   x:Uid="DinnerItem" />
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Uid="Journal" Header="Дневник"
+                        HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemsSource="{Binding Dict}" 
+                        ItemClick="ListView_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,27.5" Orientation="Vertical">
+                                    <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                                        <!-- День недели -->
+                                        <TextBlock Text="{Binding DayOfWeek}"
+                                               Style="{ThemeResource ListViewItemTextBlockStyle}" 
+                                               HorizontalAlignment="Left"/>
+                                        <!-- Дата -->
+                                        <TextBlock Text="{Binding Date}" 
+                                               Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" 
+                                               Width="100"
+                                               HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                     <!-- Калории -->
+                                    <TextBlock Text="{Binding Calories}"
+                                                Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Uid="Report" Header="Отчет"
+                        HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <!-- График x:Дни, y:калории -->
+                            <charting:Chart
+                            x:Name="CaloriesChart"
+                            x:Uid="CaloriesChart"
+                            Title="Calories" Width="400" Height="250">
+                                <charting:Chart.Series>
+                                    <charting:ColumnSeries
+                                        Title="Fats"
+                                        x:Uid="CaloriesChart"
+                                        ItemsSource="{Binding CaloryDict}"
+                                        IndependentValueBinding="{Binding Key}"
+                                        DependentValueBinding="{Binding Value}"/>
+                                </charting:Chart.Series>
+                            </charting:Chart>
+                            <!-- График x:Дни, y:белки -->
+                            <charting:Chart
+                            x:Name="ProteinsChart"
+                            x:Uid="ProteinsChart"
+                            Title="Proteins" Width="400" Height="250">
+                                <charting:Chart.Series>
+                                    <charting:ColumnSeries
+                                        Title="Fats"
+                                        x:Uid="ProteinsChart"
+                                        ItemsSource="{Binding ProteinsDict}"
+                                        IndependentValueBinding="{Binding Key}"
+                                        DependentValueBinding="{Binding Value}"/>
+                                </charting:Chart.Series>
+                            </charting:Chart>
+                            <!-- График x:Дни, y:углеводы -->
+                            <charting:Chart
+                            x:Name="CarbonsChart"
+                            x:Uid="CarbonsChart"
+                            Title="Carbons" Width="400" Height="250">
+                                <charting:Chart.Series>
+                                    <charting:ColumnSeries
+                                        Title="Fats"
+                                        x:Uid="CarbonsChart"
+                                        ItemsSource="{Binding CarbonsDict}"
+                                        IndependentValueBinding="{Binding Key}"
+                                        DependentValueBinding="{Binding Value}"/>
+                                </charting:Chart.Series>
+                            </charting:Chart>
+                            <!-- График x:Дни, y:жиры -->
+                            <charting:Chart
+                                 x:Name="FatsChart"
+                                 x:Uid="FatsChart"
+                                 Title="Fats" Width="400" Height="250">
+                                <charting:Chart.Series>
+                                    <charting:ColumnSeries
+                                        Title="Fats"
+                                        x:Uid="FatsChart"
+                                        ItemsSource="{Binding FatsDict}"
+                                        IndependentValueBinding="{Binding Key}"
+                                        DependentValueBinding="{Binding Value}"/>
+                                </charting:Chart.Series>
+                            </charting:Chart>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
+    </Grid>
+<!--
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="Sync" x:Name="SyncButton" Label="Sync btn" Click="SyncButton_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    -->
+</Page>

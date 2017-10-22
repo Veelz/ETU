@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/levels">
+        <file>levels/level1.txt</file>
+        <file>levels/level2.txt</file>
+        <file>levels/level3.txt</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/b.png</file>
+        <file>icons/c.png</file>
+        <file>icons/d.png</file>
+        <file>icons/e.png</file>
+        <file>icons/f.png</file>
+        <file>icons/selected.png</file>
+        <file>icons/g.png</file>
+        <file>icons/h.png</file>
+        <file>icons/i.png</file>
+        <file>icons/j.png</file>
+        <file>icons/k.png</file>
+        <file>icons/l.png</file>
+        <file>icons/m.png</file>
+        <file>icons/n.png</file>
+    </qresource>
+</RCC>
