@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Lab 6</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background-color: #000;
+				margin: 0px;
+				overflow: hidden;
+			}
+
+			#info {
+				position: absolute;
+				top: 0px; width: 100%;
+				color: #ffffff;
+				padding: 5px;
+				font-family: Monospace;
+				font-size: 13px;
+				text-align: center;
+			}
+
+			a {
+				color: #ff0080;
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: #0080ff;
+			}
+
+			.hidden {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="container"></div>
+
+		<script src="three.min.js"></script>
+		<script src="stats.min.js"></script>
+		<script src="dat.gui.min.js"></script>
+		<script src="OrbitControls.js"></script>
+
+		<script src="js/shaders/ConvolutionShader.js"></script>
+		<script src="js/shaders/CopyShader.js"></script>
+		<script src="js/shaders/FilmShader.js"></script>
+
+		<script src="js/postprocessing/EffectComposer.js"></script>
+		<script src="js/postprocessing/ShaderPass.js"></script>
+		<script src="js/postprocessing/MaskPass.js"></script>
+		<script src="js/postprocessing/RenderPass.js"></script>
+		<script src="js/postprocessing/BloomPass.js"></script>
+		<script src="js/postprocessing/FilmPass.js"></script>
+
+		<script src="js/WaterRefractionShader.js"></script>
+		<script src="js/Refractor.js"></script>
+
+		<script>
+			var camera, scene, renderer,
+			object, loader, stats;
+			var floorMat;
+			var cubeMatArray = [];
+			var refractors = [];
+
+			var clock = new THREE.Clock();
+
+			init();
+			animate();
+
+			function init() {
+
+				var container = document.getElementById( 'container' );
+
+				stats = new Stats();
+				container.appendChild( stats.dom );
+
+				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 100 );
+				camera.position.x = -4;
+				camera.position.z = 4;
+				camera.position.y = 2;
+
+				scene = new THREE.Scene();
+
+				var ambient = new THREE.AmbientLight( 0xffffff, 0.1 );
+				scene.add( ambient );
+
+				spotLight = new THREE.SpotLight( 0xffffff, 1 );
+				spotLight.position.set( 1, 2, 3 );
+				spotLight.angle = 0.6;
+				spotLight.penumbra = 0.1;
+				spotLight.decay = 2;
+				spotLight.distance = 200;
+				spotLight.castShadow = true;
+				spotLight.shadow.mapSize.width = 1024;
+				spotLight.shadow.mapSize.height = 1024;
+				spotLight.shadow.camera.near = 1;
+				spotLight.shadow.camera.far = 200;
+				spotLight.intensity = 2;
+				scene.add( spotLight );
+
+				// lightHelper = new THREE.SpotLightHelper( spotLight );
+				// scene.add( lightHelper );
+
+				floorMat = new THREE.MeshStandardMaterial( {
+					roughness: 0.8,
+					color: 0xffffff,
+					metalness: 0.2,
+					bumpScale: 0.0005
+				});
+				var textureLoader = new THREE.TextureLoader();
+
+				cubeMatArray[0] = new THREE.MeshStandardMaterial( {
+					roughness: 0.7,
+					color: 0xffffff,
+					bumpScale: 0.002,
+					metalness: 0.2
+				});
+				textureLoader.load( "resources/wood_spruce.png", function( map ) {
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 1, 1 );
+					cubeMatArray[0].map = map;
+					cubeMatArray[0].needsUpdate = true;
+				} );
+
+				cubeMatArray[1] = new THREE.MeshStandardMaterial( {
+					roughness: 0.7,
+					color: 0xffffff,
+					bumpScale: 0.002,
+					metalness: 0.2
+				});
+				textureLoader.load( "resources/brick.png", function( map ) {
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 2, 2 );
+					cubeMatArray[1].map = map;
+					cubeMatArray[1].needsUpdate = true;
+				} );
+
+
+				cubeMatArray[2] = new THREE.MeshBasicMaterial( {
+					color: 0xffffff,
+					// emissive: 0x999999
+				});
+
+				textureLoader.load( "resources/lava.png", function( map ) {
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					// map.anisotropy = 4;
+					map.repeat.set( 1, 1 );
+					cubeMatArray[2].map = map;
+					cubeMatArray[2].needsUpdate = true;
+				} );
+
+				cubeMatArray[3] = new THREE.MeshStandardMaterial( {
+					roughness: 0.7,
+					color: 0xffffff,
+					bumpScale: 0.002,
+					metalness: 0.2
+				});
+				textureLoader.load( "resources/cobblestone.png", function( map ) {
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 3, 3 );
+					cubeMatArray[3].map = map;
+					cubeMatArray[3].needsUpdate = true;
+				} );
+
+				cubeMatArray[4] = new THREE.MeshStandardMaterial( {
+					roughness: 0.7,
+					color: 0xffffff,
+					bumpScale: 0.002,
+					metalness: 0.2,
+					transparent: true
+				});
+				textureLoader.load( "resources/wood_spruce.png", function( map ) {
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 1, 1 );
+					cubeMatArray[4].map = map;
+					cubeMatArray[4].needsUpdate = true;
+				} );
+				textureLoader.load( "resources/mask.png", function( map ) {
+					map.wrapS = THREE.RepeatWrapping;
+					map.wrapT = THREE.RepeatWrapping;
+					map.anisotropy = 4;
+					map.repeat.set( 1, 1 );
+					cubeMatArray[4].alphaMap = map;
+					cubeMatArray[4].needsUpdate = true;
+				} );
+
+				var floorGeometry = new THREE.PlaneBufferGeometry( 20, 20 );
+				var floorMesh = new THREE.Mesh( floorGeometry, floorMat );
+				floorMesh.receiveShadow = true;
+				floorMesh.rotation.x = -Math.PI / 2.0;
+				scene.add( floorMesh );
+
+				var boxGeometry = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
+				var boxMesh = new THREE.Mesh( boxGeometry, cubeMatArray[0] );
+				boxMesh.position.set( -0.5, 0.25, -1 );
+				boxMesh.castShadow = true;
+				scene.add( boxMesh );
+
+				var boxMesh2 = new THREE.Mesh( boxGeometry, cubeMatArray[1] );
+				boxMesh2.position.set( 0, 0.25, -3 );
+				boxMesh2.castShadow = true;
+				scene.add( boxMesh2 );
+
+				var boxMesh3 = new THREE.Mesh( boxGeometry, cubeMatArray[2] );
+				boxMesh3.position.set( 2, 0.25, 0 );
+				boxMesh3.castShadow = true;
+				scene.add( boxMesh3 );
+
+				var lavaGeometry = new THREE.SphereGeometry( 0.02, 16, 8 );
+				lavaLight1 = new THREE.PointLight( 0xff0000, 50, 2, 2 );
+				lavaLight2 = new THREE.PointLight( 0xff1200, 50, 1.2, 2 );
+
+				lavaMat = new THREE.MeshStandardMaterial( {
+					emissive: 0xff0000,
+					emissiveIntensity: 1,
+					color: 0x000000
+				});
+				lavaLight1.add( new THREE.Mesh( lavaGeometry, lavaMat ) );
+				lavaLight2.add( new THREE.Mesh( lavaGeometry, lavaMat ) );
+				lavaLight1.position.set( 2, 0.25, 0 );
+				lavaLight2.position.set( 2, 0.25, 0 );
+				lavaLight1.castShadow = false;
+				lavaLight2.castShadow = false;
+				scene.add( lavaLight1 );
+				scene.add( lavaLight2 );
+
+
+				var boxMesh4 = new THREE.Mesh( boxGeometry, cubeMatArray[3] );
+				boxMesh4.position.set( -2, 0.25, 0 );
+				boxMesh4.castShadow = true;
+				scene.add( boxMesh4 );
+
+				// transparent cube
+				var boxMesh5 = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 0.5), cubeMatArray[4] );
+				boxMesh5.position.set( -2, 0.25, -3 );
+				boxMesh5.castShadow = true;
+				scene.add( boxMesh5 );
+
+				// refractors
+				for (i = 0; i < 5; i++) {
+					refractors[i] = new THREE.Refractor( 0.5, 0.5, {
+						color: 0x9999f0,
+						textureWidth: 1024,
+						textureHeight: 1024,
+						shader: THREE.WaterRefractionShader
+					} );
+				}
+
+				refractors[0].position.set( -2, 0.25, -2.749 );
+				refractors[1].position.set( -2, 0.25, -3.251 );
+				refractors[1].rotation.y = Math.PI;
+
+				refractors[2].position.set( -2.251, 0.25, -3 );
+				refractors[2].rotation.y = -Math.PI / 2;
+
+				refractors[3].position.set( -1.749, 0.25, -3 );
+				refractors[3].rotation.y = Math.PI / 2;
+
+				refractors[4].position.set( -2, 0.501, -3 );
+				refractors[4].rotation.x = -Math.PI / 2;
+
+				for (i = 0; i < 5; i++) {
+					scene.add( refractors[i] );
+				}
+				// load dudv map for distortion effect
+				var dudvMap = new THREE.TextureLoader().load( 'resources/waterdudv.jpg', function () {
+					animate();
+				} );
+				dudvMap.wrapS = dudvMap.wrapT = THREE.RepeatWrapping;
+
+				for (i = 0; i < 5; i++) {
+					refractors[i].material.uniforms.tDudv.value = dudvMap;
+				}
+
+				renderer = new THREE.WebGLRenderer();
+				renderer.gammaInput = true;
+				renderer.gammaOutput = true;
+				renderer.shadowMap.enabled = true;
+				renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+				renderer.toneMapping = THREE.ReinhardToneMapping;
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				container.appendChild( renderer.domElement );
+
+
+				var controls = new THREE.OrbitControls( camera, renderer.domElement );
+				controls.addEventListener( 'change', render );
+
+
+				window.addEventListener( 'resize', onWindowResize, false );
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+
+			}
+
+			var previousShadowMap = true;
+
+			function render() {
+
+				var time = Date.now() * 0.0005;
+				var delta = clock.getDelta();
+
+				for (i = 0; i < 5; i++){
+					refractors[i].material.uniforms.time.value += delta;
+				}
+				renderer.render( scene, camera );
+
+				stats.update();
+
+			}
+
+		</script>
+	</body>
+</html>
