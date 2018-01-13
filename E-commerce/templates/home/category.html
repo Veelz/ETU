@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row" style="margin-top: 80px">
+    <div class="col-lg-2">
+      <h3 class="text-center">Category</h3>
+      <ul class="nav nav-pills nav-stacked">
+        {% for cat in categories %}
+          <li class="text-center"><a href="{% url 'category' cat_id=cat.id %}">{{ cat.name }}<span class="badge">{{ cat.count }}</span></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-lg-10">
+      <div class="row">
+        <h3 class="text-center">{{ category_name | upper }}</h3>
+      </div>
+      <div class="row">
+        <form id="form_buying_product" class="form-inline" action="{% url 'update_cart' %}">{% csrf_token %}
+          {% for product_image in product_images %}
+            {% include 'home/product_item.html' %}
+          {% endfor %}
+        </form>
+      </div>
+      <div class="row text-center">
+        <ul class="pagination">
+          {% if product_images.paginator.page_range > 1 %}
+            {% for page in product_images.paginator.page_range %}
+              {% if page == product_images.number %}
+                <li class="current"><a href="{% url 'cat_page' cat_id=category_id page_number=page %}">{{ page }}</a></li>
+              {% else %}
+                <li><a href="{% url 'cat_page' cat_id=category_id page_number=page %}">{{ page }}</a></li>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

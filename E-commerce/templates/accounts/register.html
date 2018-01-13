@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row" style="margin-top: 120px">
+    <form action="{% url 'register' %}" method="post"> {% csrf_token %}
+      <div class="col-lg-5 col-lg-offset-4">
+        <div class="form-group text-left">
+          <label for="{{ user_form.username.id_for_label }}" style="width: 170px">Имя пользователя:</label>
+          {{ user_form.username }}
+          {{ user_form.username.errors }}
+        </div>
+        <div class="form-group text-left">
+          <label for="{{ user_form.password1.id_for_label }}" style="width: 170px">Пароль:</label>
+          {{ user_form.password1 }}
+          {{ user_form.password1.errors }}
+        </div>
+        <div class="form-group text-left">
+          <label for="{{ user_form.password2.id_for_label }}" style="width: 170px">Подтверждение пароля:</label>
+          {{ user_form.password2 }}
+          {{ user_form.password2.errors }}
+        </div>
+        <div class="form-group text-left">
+          <label for="user_form.email.id_for_label" style="width: 170px">Email:</label>
+          {{ user_form.email }}
+          {{ user_form.email.errors }}
+        </div>
+        <div class="form-group text-left">
+          <label for="user_form.first_name.id_for_label" style="width: 170px">Имя:</label>
+          {{ user_form.first_name }}
+          {{ user_form.first_name.errors }}
+        </div>
+        <div class="form-group text-left">
+          <label for="user_form.last_name.id_for_label" style="width: 170px">Фамилия:</label>
+          {{ user_form.last_name }}
+          {{ user_form.last_name.errors }}
+        </div>
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-primary" id="sing_up_btn">Sign up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

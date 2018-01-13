@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 product-page-slider">
+        {% for image_item in product.productimage_set.all %}
+        <div class="photo">
+          <img class="product-img-item center-block" src="{{ image_item.image.url }}"/>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="col-lg-6">
+        <h2 class="text-center">{{ product.name }}</h2>
+        <div class="row">
+          {{ product.description }}
+        </div>
+        <div class="row">
+          <h5>Price: ${{ product.price }}</h5>
+        </div>
+        <div>
+          <form id="form_buying_product" method="post" class="form-inline" action="{% url 'update_cart' %}">{% csrf_token %}
+            <div class="form-group">
+              <label for="count">Количество: </label>
+              <input type="number" id="count" class="form-control" min="1" value="1">
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary"
+                id="submit_btn"
+                data-product_id="{{ product.id }}"
+                data-product_name="{{ product.name }}"
+                data-product_price="{{ product.price }}">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Добавить в корзину
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% if comments %}
+        {% for comment in comments %}
+          <div class="row">
+            <h4><b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b>, {{ comment.create_date.date }}</h4>
+            <span>{{ comment.comment_text }}</span>
+            <hr>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h4>Be first commentator</h4>
+      {% endif %}
+    </div>
+    <div id="comment_div" class="row">
+      <div id="inner_comment_div" class="row hidden">
+        <h4><b><span id="comment_username"></span></b>, <span id="comment_date"></span></h4>
+        <span id="comment_text"></span>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      {% if username %}
+        <form id="form_add_comment" method="post" class="form-inline" action="{% url 'add_comment' product_id=product.id %}">{% csrf_token %}
+          <div class="form-group">
+            <input id="user_comment_text" type="text" maxlength="300" class="form-control">
+          </div>
+          <div class="form-group">
+            <button id="user_comment_btn" class="btn btn-primary">Comment</button>
+          </div>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}">Sign in</a> or <a href="{% url 'register' %}">sign up</a> to comment
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

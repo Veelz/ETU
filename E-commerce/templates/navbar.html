@@ -1,0 +1,99 @@
+{% load static %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" style="background: url({% static 'home/logo.png' %})" href="/"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+            aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            {% for cat in categories %}
+              <li><a href="{% url 'category' cat_id=cat.id %}">{{ cat.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+      <form id="search_form" method="get" action="{% url 'search' %}" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" name="search" placeholder="type to search">
+        </div>
+        <button type="submit" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li id="dropdown-toggle" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cart(<span id="products_count">{{ products_count }}</span>)
+            <span class="caret"></span>
+          </a>
+          <ul id="dropdown-cart" class="dropdown-menu">
+            {% if cart %}
+            <div class="cart-container">
+              <table>
+                <tbody id="nav_table_cart">
+                  {% for item in cart %}
+                    <tr class="cart-table-row">
+                        <td style="width:70%">
+                          <div class="cart-product-name">
+                            <a href="{% url 'product' product_id=item.product_id %}">{{ item.product_name }}</a>
+                          </div>
+                        </td>
+                        <td style="width:10%">
+                          <div class="cart-product-price">
+                            ${{ item.product_price }}
+                          </div>
+                        </td>
+                        <td style="width:10%">
+                          <div class="cart-product-count">
+                            <span>X{{ item.count }}</span>
+                          </div>
+                        </td>
+                        <td style="width:10%">
+                          <div class="cart-product-delete">
+                            <a href="" class="delete-item" data-product_id="{{ item.product_id }}">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                          </div>
+                        </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <li><a href="">Subtotal: ${{ total_price }}</a></li>
+            <li><a href="{% url 'checkout' %}">View cart</a></li>
+            {% else %}
+              <li class="dropdown-header">Empty</li>
+            {% endif %}
+          </ul>
+        </li>
+        {% if username %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+              aria-haspopup="true" aria-expanded="false">{{ username }} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'account' %}">Your Account</a></li>
+              <li><a href="{% url 'logout' %}">Sign out</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Sign up or Sign in</a></li>
+        {% endif %}
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</nav>

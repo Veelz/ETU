@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row" style="margin-top: 80px">
+    <h3>Hello, <b>{{ username }}</b>!</h3>
+  </div>
+  <div class="row">
+    <h3><b>Заказы:</b></h3>
+    <div class="row">
+      {% if orders %}
+        {% for order in orders %}
+          <h4>Заказ от {{ order.create_date.date }}</h4>
+          <div class="row">
+            <ul>
+              {% for product_in_order in order.products %}
+                <li><h5>{{ product_in_order.product.name }}</h5> ${{ product_in_order.price_per_item }} x{{product_in_order.count}}</li>
+              {% endfor %}
+              <h5><b>Total</b>: ${{ order.total_price }}</h5>
+            </ul>
+          </div>
+          <hr>
+        {% endfor %}
+      {% else %}
+        <h4>Заказов нет</h4>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

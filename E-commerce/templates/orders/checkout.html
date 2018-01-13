@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="row" style="margin-top: 85px">
+      <h2 class="text-center">CART</h2>
+    </div>
+    {% if cart %}
+      <div class="row">
+        <h4 class="text-center">Total amount: ${{ total_price }}</h4>
+      </div>
+      <form method="post">{% csrf_token %}
+        <div class="col-lg-8 col-lg-offset-2">
+          <table class="table text-center">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Count</th>
+                <th>Price per item</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in cart %}
+                <tr>
+                  <td>{{ item.product_name }}</td>
+                  <td><input value="{{ item.count }}" type="number"
+                    name="product_{{ item.product_id }}" min="1"></td>
+                  <td>${{ item.product_price }}</td>
+                  <td>${{ item.total_price }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="row text-right">
+            <b>Total: </b>${{ total_price }}
+          </div>
+          <hr>
+          {% if username %}
+            <div class="row text-right">
+              <button type="submit" class="btn btn-primary btn-lg">Order!</button>
+            </div>
+          {% else %}
+            <div class="row text-right">
+              <a href="{% url 'login' %}">Sign in to make order</a>
+            </div>
+          {% endif %}
+        </div>
+      </form>
+    {% else %}
+      <h3 class='text-center'>Your cart is empty now.</h3>
+    {% endif %}
+  </div>
+{% endblock %}

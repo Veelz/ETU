@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row" style="margin-top: 120px">
+    <form id="search_form" method="get" action="{% url 'search' %}">
+      <div class="form-group">
+        <input type="search" name="search" placeholder="type to search" value="{{ query_text }}">
+        <button type="submit" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-search"></span> Search
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    {% if products_sets %}
+      <h3>Лучшие результаты</h3>
+      {% for products in products_sets %}
+        {% for product in products %}
+          <div class="row">
+            <h5><a href="{% url 'product' product_id=product.id %}">{{ product.name }}</a></h5>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    {% else %}
+      <h3>Простите, ничего не найдено</h3>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

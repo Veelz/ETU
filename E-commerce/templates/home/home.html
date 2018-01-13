@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form id="form_buying_product" class="form-inline" action="{% url 'update_cart' %}">{% csrf_token %}
+
+<!-- Slider -->
+  <div class="slider">
+    <div class="slide slide1" style="background: url({% static 'home/1.jpg' %})"></div>
+    <div class="slide slide2" style="background: url({% static 'home/2.jpg' %})"></div>
+    <div class="slide slide3" style="background: url({% static 'home/3.jpg' %})"></div>
+    <div class="slide slide4" style="background: url({% static 'home/4.jpg' %})"></div>
+  </div>
+
+<!-- Slider -->
+
+  <!-- Categoty#1 -->
+  <div class="section section1">
+    <div class="container">
+      <div class="row">
+        <div class="row">
+          <h2 class="text-center">Новая коллекция</h2>
+        </div>
+        {% for product_image in product_images_new %}
+          {% include 'home/product_item.html' %}
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+  <!-- Category#1 -->
+
+  <!-- Category#2 -->
+  <div class="section section2">
+    <div class="container">
+      <div class="row">
+        <div class="row">
+          <h2 class="text-center">{{ product_images_cat_1_name }}</h2>
+        </div>
+        {% for product_image in product_images_cat_1 %}
+          {% include 'home/product_item.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- Category#2 -->
+
+  <!-- Category#3  -->
+  <div class="section section3">
+    <div class="container">
+      <div class="row">
+        <div class="row">
+          <h2 class="text-center">{{ product_images_cat_2_name }}</h2>
+        </div>
+        {% for product_image in product_images_cat_2 %}
+            {% include 'home/product_item.html' %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- Category#3 -->
+</form>
+{% endblock %}
