@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file alias="roboto_black">fonts/Roboto/Roboto-Black.ttf</file>
+        <file alias="roboto_bold">fonts/Roboto/Roboto-Bold.ttf</file>
+        <file alias="roboto_light">fonts/Roboto/Roboto-Light.ttf</file>
+        <file alias="roboto_medium">fonts/Roboto/Roboto-Medium.ttf</file>
+        <file alias="roboto_regular">fonts/Roboto/Roboto-Regular.ttf</file>
+        <file alias="roboto_thin">fonts/Roboto/Roboto-Thin.ttf</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file alias="edit-icon.png">icons/edit.png</file>
+        <file alias="save-icon.png">icons/save.png</file>
+        <file alias="cancel-icon.png">icons/cancel.png</file>
+    </qresource>
+    <qresource prefix="/bin">
+        <file>bin/COMPSOGNATUS.bin</file>
+    </qresource>
+</RCC>
